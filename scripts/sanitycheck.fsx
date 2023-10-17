@@ -364,7 +364,7 @@ let SanityCheckNugetPackages () =
                 Console.Error.WriteLine (sprintf "Missing folder for nuget package in submodule: %s (referenced from %s)" missingPkg depHolderNames)
             Environment.Exit 1
 
-#if LEGACY_FRAMEWORK
+#if !LEGACY_FRAMEWORK
         let excessPackageDirs = findExcessPackageDirs solDir idealDirList
         if excessPackageDirs.Any () then
             let advice = "remove it with git filter-branch to avoid needless bandwidth: http://stackoverflow.com/a/17824718/6503091"
