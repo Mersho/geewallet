@@ -418,9 +418,34 @@ let SanityCheckNugetPackages () =
                     yield solution
         }
 
-    let solutions = Directory.GetCurrentDirectory() |> DirectoryInfo |> findSolutions
-    for sol in solutions do
-        sanityCheckNugetPackagesFromSolution sol
+    //let solutions = Directory.GetCurrentDirectory() |> DirectoryInfo |> findSolutions
+    //NOTE: we hardcode the solutions rather than the line above, because e.g. Linux OS can't build/restore iOS proj
+
+    let solutionFiles = Seq.toList (Directory.GetCurrentDirectory() |> DirectoryInfo |> findSolutions)
+
+    let checkFilesExist (fileNames: List<FileInfo>) =
+        fileNames
+        |> List.map (fun fileName -> fileName.Exists)
+        |> List.fold (&&) true
+
+    let allFilesExist = checkFilesExist solutionFiles
+
+    if not allFilesExist then
+        failwith "Solution files were not found to do sanity check."
+
+    match Misc.GuessPlatform() with
+        // xbuild cannot build .NETStandard projects so we cannot build the non-Core parts:
+        | Misc.Platform.Linux when "msbuild" = Environment.GetEnvironmentVariable "BuildTool" ->
+            sanityCheckNugetPackagesFromSolution solutionFiles.[0]
+
+        | Misc.Platform.Mac ->
+            sanityCheckNugetPackagesFromSolution solutionFiles.[1]
+
+        | _ (* stockmono linux and windows *) ->
+
+            // TODO: have a windows solution file
+            sanityCheckNugetPackagesFromSolution solutionFiles.[2]
+  
 
 FindOffendingPrintfUsage()
 SanityCheckNugetPackages()
