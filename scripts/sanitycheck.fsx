@@ -377,10 +377,12 @@ let SanityCheckNugetPackages () =
             Console.Error.WriteLine (sprintf "Package found with more than one version: %s. All occurrences:" key)
             for file,pkgInfo in packageInfos do
                 Console.Error.WriteLine (sprintf "* Version: %s. Dependency holder: %s" pkgInfo.PackageVersion file.DependencyHolderName.Name)
+#if !LEGACY_FRAMEWORK
         let packagesWithMoreThanOneVersion = findPackagesWithMoreThanOneVersion packageTree
         if packagesWithMoreThanOneVersion.Any() then
             Map.iter pkgWithMoreThan1VersionPrint packagesWithMoreThanOneVersion
             Environment.Exit 1
+#endif
 
         let findPackagesWithSomeReqReinstallAttrib
             (packageTree: Map<ComparableFileInfo,seq<PackageInfo>>)
