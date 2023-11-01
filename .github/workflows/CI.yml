@@ -28,6 +28,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
@@ -66,6 +67,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
@@ -96,6 +98,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
@@ -128,6 +131,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: .\make.bat sanitycheck
@@ -164,6 +168,7 @@ jobs:
     - name: Download Mersho SanityCheck
       run: |
         rm .\scripts\sanitycheck.fsx
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: .\make.bat sanitycheck
@@ -195,6 +200,7 @@ jobs:
     - name: Download Mersho SanityCheck
       run: |
         rm .\scripts\sanitycheck.fsx
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: .\make.bat sanitycheck
@@ -236,6 +242,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     # - name: sanity check
     #   run: make sanitycheck
@@ -273,6 +280,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     # - name: sanity check
     #   run: make sanitycheck
@@ -320,6 +328,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     # - name: sanity check
     #   run: make sanitycheck
@@ -361,6 +370,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
@@ -412,6 +422,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
@@ -462,6 +473,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
@@ -518,6 +530,7 @@ jobs:
         which sudo 2>/dev/null || (apt update && apt install --yes sudo)
         sudo apt update
         sudo apt install --yes curl
+        dotnet restore
         curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     # - name: sanity check
     #   run: make sanitycheck
