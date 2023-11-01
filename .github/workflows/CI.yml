@@ -22,6 +22,13 @@ jobs:
       run: ./configure.sh
     - name: build in DEBUG mode
       run: make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
     - name: unit tests
@@ -53,6 +60,13 @@ jobs:
       run: ./configure.sh
     - name: build in DEBUG mode
       run: make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
     - name: unit tests
@@ -76,6 +90,13 @@ jobs:
       run: ./configure.sh
     - name: build in DEBUG mode
       run: make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
     - name: unit tests
@@ -101,6 +122,13 @@ jobs:
       run: .\configure.bat
     - name: build in DEBUG mode
       run: .\make.bat
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: .\make.bat sanitycheck
     - name: unit tests
@@ -133,6 +161,10 @@ jobs:
       run: .\configure.bat
     - name: build in DEBUG mode
       run: .\make.bat
+    - name: Download Mersho SanityCheck
+      run: |
+        rm .\scripts\sanitycheck.fsx
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: .\make.bat sanitycheck
     - name: unit tests
@@ -160,6 +192,10 @@ jobs:
       run: .\configure.bat
     - name: build in DEBUG mode
       run: .\make.bat
+    - name: Download Mersho SanityCheck
+      run: |
+        rm .\scripts\sanitycheck.fsx
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: .\make.bat sanitycheck
     - name: unit tests
@@ -194,6 +230,13 @@ jobs:
       run: ./configure.sh
     - name: build in DEBUG mode
       run: make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     # - name: sanity check
     #   run: make sanitycheck
     - name: unit tests
@@ -224,6 +267,13 @@ jobs:
     - name: build in DEBUG mode (retry 3 times because of flakey XamForms restore)
       # TODO: remove retry when we migrate to .NET6 (removing LEGACY_FRAMEWORK support)
       run: make || make || make || make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     # - name: sanity check
     #   run: make sanitycheck
     - name: unit tests
@@ -264,6 +314,13 @@ jobs:
       run: ./configure.sh
     - name: build in DEBUG mode
       run: make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     # - name: sanity check
     #   run: make sanitycheck
     - name: unit tests
@@ -298,6 +355,13 @@ jobs:
       run: ./configure.sh
     - name: build in DEBUG mode
       run: make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
     - name: unit tests
@@ -342,6 +406,13 @@ jobs:
       run: ./configure.sh
     - name: build in DEBUG mode
       run: make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
     - name: unit tests
@@ -385,6 +456,13 @@ jobs:
       run: ./configure.sh
     - name: build in DEBUG mode
       run: make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     - name: sanity check
       run: make sanitycheck
     - name: unit tests
@@ -434,6 +512,13 @@ jobs:
     - name: build in DEBUG mode (retry 3 times because of flakey XamForms restore)
       # TODO: remove retry when we migrate to .NET6 (removing LEGACY_FRAMEWORK support)
       run: make || make || make || make
+    - name: Download Mersho SanityCheck
+      run: |
+        rm ./scripts/sanitycheck.fsx
+        which sudo 2>/dev/null || (apt update && apt install --yes sudo)
+        sudo apt update
+        sudo apt install --yes curl
+        curl -o ./scripts/sanitycheck.fsx https://raw.githubusercontent.com/Mersho/conventions/SanityCheckStepSquashed/scripts/sanityCheckNuget.fsx
     # - name: sanity check
     #   run: make sanitycheck
     - name: unit tests
