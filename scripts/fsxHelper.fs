@@ -22,6 +22,7 @@ module FsxHelper =
         let slnFile =
             Path.Combine("src", solFileName)
             |> FileInfo
+        printf "Looooooog sln file: %A" slnFile 
         if not slnFile.Exists then
             raise <| FileNotFoundException("Solution file not found", slnFile.FullName)
         slnFile
