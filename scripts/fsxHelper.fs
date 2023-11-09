@@ -6,24 +6,18 @@ open System.IO
 open Fsdk
 open Fsdk.Process
 
-type SolutionFile =
-    | Default
-    | Linux
-    | Mac
-
 module FsxHelper =
 
-    let GetSolution (solType: SolutionFile) =
+    let GetSolution () =
         let solFileName =
-            match solType with
-            | Default ->
-    #if !LEGACY_FRAMEWORK
+            #if !LEGACY_FRAMEWORK
                 "gwallet.core.sln"
-    #else
-                "gwallet.core-legacy.sln"
-    #endif
-            | Linux -> "gwallet.linux-legacy.sln"
-            | Mac -> "gwallet.mac-legacy.sln"
+            #else
+                match Misc.GuessPlatform() with
+                | Misc.Platform.Windows -> "gwallet.core-legacy.sln"
+                | Misc.Platform.Linux -> "gwallet.linux-legacy.sln"
+                | Misc.Platform.Mac -> "gwallet.mac-legacy.sln"
+            #endif
 
         let slnFile =
             Path.Combine("src", solFileName)

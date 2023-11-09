@@ -251,7 +251,7 @@ let JustBuild binaryConfig maybeConstant: Frontend*FileInfo =
     let maybeBuildTool = Map.tryFind "BuildTool" buildConfigContents
     let maybeLegacyBuildTool = Map.tryFind "LegacyBuildTool" buildConfigContents
 
-    let solutionFile = FsxHelper.GetSolution SolutionFile.Default
+    let solutionFile = FsxHelper.GetSolution ()
     let getBuildToolAndArgs(buildTool: string) =
         match buildTool with
         | "dotnet" ->
@@ -306,7 +306,7 @@ let JustBuild binaryConfig maybeConstant: Frontend*FileInfo =
             | Misc.Platform.Mac ->
                 //this is because building in release requires code signing keys
                 if binaryConfig = BinaryConfig.Debug then
-                    let solution = FsxHelper.GetSolution SolutionFile.Mac
+                    let solution = FsxHelper.GetSolution ()
                     // somehow, msbuild doesn't restore the frontend dependencies (e.g. Xamarin.Forms) when targetting
                     // the {LINUX|MAC}_SOLUTION_FILE below, so we need this workaround. TODO: just finish migrating to MAUI(dotnet restore)
                     NugetRestore solution
@@ -315,7 +315,7 @@ let JustBuild binaryConfig maybeConstant: Frontend*FileInfo =
                 Frontend.Console
             | Misc.Platform.Linux ->
                 if FsxHelper.AreGtkLibsPresent Echo.All then
-                    let solution = FsxHelper.GetSolution SolutionFile.Linux
+                    let solution = FsxHelper.GetSolution ()
                     // somehow, msbuild doesn't restore the frontend dependencies (e.g. Xamarin.Forms) when targetting
                     // the {LINUX|MAC}_SOLUTION_FILE below, so we need this workaround. TODO: just finish migrating to MAUI(dotnet restore)
                     NugetRestore solution

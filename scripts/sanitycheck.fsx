@@ -147,7 +147,7 @@ let SanityCheckNugetPackages () =
         sprintf
             "%s %s"
             sanityCheckExecuteCommand
-            (FsxHelper.GetSolution SolutionFile.Default)
+            (FsxHelper.GetSolution ())
                 .FullName
 
 
