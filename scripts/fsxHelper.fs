@@ -14,9 +14,9 @@ module FsxHelper =
                 "gwallet.core.sln"
             #else
                 match Misc.GuessPlatform() with
-                | Misc.Platform.Windows -> "gwallet.core-legacy.sln"
                 | Misc.Platform.Linux -> "gwallet.linux-legacy.sln"
                 | Misc.Platform.Mac -> "gwallet.mac-legacy.sln"
+                | _ -> "gwallet.core-legacy.sln"
             #endif
 
         let slnFile =
