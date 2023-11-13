@@ -34,12 +34,12 @@ type ProjectFile =
 let GetProject (projFile: ProjectFile) =
     let projFileName =
         match projFile with
-        | ConsoleFrontend -> Path.Combine("GWallet.Frontend.Console", "GWallet.Frontend.Console.fsproj")
-        | GtkFrontend -> Path.Combine("GWallet.Frontend.XF.Gtk", "GWallet.Frontend.XF.Gtk.fsproj")
-        | XFFrontend -> Path.Combine("GWallet.Frontend.XF", "GWallet.Frontend.XF.fsproj")
+        | ConsoleFrontend -> "GWallet.Frontend.Console"
+        | GtkFrontend -> "GWallet.Frontend.XF.Gtk"
+        | XFFrontend -> "GWallet.Frontend.XF"
 
     let prjFile =
-        Path.Combine("src", projFileName)
+        Path.Combine("src", projFileName, sprintf "%s.fsproj" projFileName)
         |> FileInfo
     if not prjFile.Exists then
         raise <| FileNotFoundException("Project file not found", prjFile.FullName)
