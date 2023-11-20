@@ -28,16 +28,14 @@ let readSnapcraftYaml = File.ReadAllText snapcraftDir
 let currentVersion = Misc.GetCurrentVersion(FsxHelper.RootDir)
 
 let newVersion =
-    Version(currentVersion.Major, currentVersion.Minor + 2, currentVersion.Build, currentVersion.Revision).ToString()
+    Version(currentVersion.Major, currentVersion.Minor + 2, currentVersion.Build + 1, currentVersion.Revision).ToString()
 
 let newSnapYaml =
     readSnapcraftYaml.Replace(currentVersion.ToString(), newVersion)
 
-File.WriteAllText(snapcraftDir, newSnapYaml)
-
 Process.Execute(
     {
         Command = "dotnet"
-        Arguments = sprintf "fsi ./bump.fsx %s" newVersion
+        Arguments = sprintf "fsi %s %s" (Path.Combine(FsxHelper.ScriptsDir.FullName, "bump.fsx")) newVersion
     }, Echo.All
 )
