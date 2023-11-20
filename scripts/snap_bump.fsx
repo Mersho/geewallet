@@ -31,4 +31,4 @@ Process.Execute(
         Command = "dotnet"
         Arguments = sprintf "fsi %s %s --auto" (Path.Combine(FsxHelper.ScriptsDir.FullName, "bump.fsx")) newVersion
     }, Echo.All
-)
+).UnwrapDefault() |> ignore<string>

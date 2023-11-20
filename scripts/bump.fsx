@@ -30,8 +30,8 @@ let isAuto =
 
 let suppliedVersion =
     if args.Length > 0 then
-        if args.Length > 1 then
-            Console.Error.WriteLine "Only one argument supported, not more"
+        if args.Length > 2 then
+            Console.Error.WriteLine "Only two argument supported, not more"
             Environment.Exit 1
             failwith "Unreachable"
         else
@@ -273,8 +273,9 @@ Console.WriteLine "Bumping..."
 if not isAuto then
     RunUpdateServers()
 let fullUnstableVersion,newFullStableVersion = Bump true
-GitCommit fullUnstableVersion newFullStableVersion
-GitTag newFullStableVersion
+if not isAuto then
+    GitCommit fullUnstableVersion newFullStableVersion
+    GitTag newFullStableVersion
 
 Console.WriteLine (sprintf "Version bumped to %s."
                            (newFullStableVersion.ToString()))
