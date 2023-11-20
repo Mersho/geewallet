@@ -278,7 +278,10 @@ GitTag newFullStableVersion
 Console.WriteLine (sprintf "Version bumped to %s."
                            (newFullStableVersion.ToString()))
 
-if isReleaseManual && not (isAuto) then
+if isAuto then
+    Environment.Exit 0
+
+if isReleaseManual then
     Console.WriteLine "Release binaries now and press any key when you finish."
     Console.ReadKey true |> ignore
 
