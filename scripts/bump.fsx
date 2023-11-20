@@ -270,7 +270,8 @@ if not replaceScript.Exists then
 GitDiff()
 
 Console.WriteLine "Bumping..."
-RunUpdateServers()
+if not isAuto then
+    RunUpdateServers()
 let fullUnstableVersion,newFullStableVersion = Bump true
 GitCommit fullUnstableVersion newFullStableVersion
 GitTag newFullStableVersion
