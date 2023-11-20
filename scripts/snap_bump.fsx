@@ -21,21 +21,14 @@ open Fsdk.Process
 #load "fsxHelper.fs"
 open GWallet.Scripting
 
-let snapcraftDir =
-    Path.Combine(FsxHelper.RootDir.FullName, "snap", "snapcraft.yaml")
-
-let readSnapcraftYaml = File.ReadAllText snapcraftDir
 let currentVersion = Misc.GetCurrentVersion(FsxHelper.RootDir)
 
 let newVersion =
     Version(currentVersion.Major, currentVersion.Minor + 2, currentVersion.Build + 1, currentVersion.Revision).ToString()
 
-let newSnapYaml =
-    readSnapcraftYaml.Replace(currentVersion.ToString(), newVersion)
-
 Process.Execute(
     {
         Command = "dotnet"
-        Arguments = sprintf "fsi %s %s" (Path.Combine(FsxHelper.ScriptsDir.FullName, "bump.fsx")) newVersion
+        Arguments = sprintf "fsi %s %s --auto" (Path.Combine(FsxHelper.ScriptsDir.FullName, "bump.fsx")) newVersion
     }, Echo.All
 )
