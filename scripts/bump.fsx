@@ -21,6 +21,13 @@ let IsStable miniVersion =
     (int miniVersion % 2) = 0
 
 let args = Misc.FsxOnlyArguments()
+
+let isAuto = 
+    if args |> List.contains "--auto" then
+        true
+    else
+        false
+
 let suppliedVersion =
     if args.Length > 0 then
         if args.Length > 1 then
@@ -271,7 +278,7 @@ GitTag newFullStableVersion
 Console.WriteLine (sprintf "Version bumped to %s."
                            (newFullStableVersion.ToString()))
 
-if isReleaseManual then
+if isReleaseManual && not (isAuto) then
     Console.WriteLine "Release binaries now and press any key when you finish."
     Console.ReadKey true |> ignore
 

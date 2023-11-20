@@ -69,7 +69,9 @@ jobs:
       run: sudo rm `which msbuild`
     
     - name: Bump snap version
-      run: dotnet fsi ./scripts/snap_bump.fsx
+      run: |
+        git submodule foreach git fetch --all && git submodule sync --recursive && git submodule update --init --recursive
+        dotnet fsi ./scripts/snap_bump.fsx
 
     - name: Generate snap package
       run: |
