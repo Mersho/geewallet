@@ -74,4 +74,3 @@ if [ ! -z "${RUNNER_ARG}" ]; then
 fi
 source scripts/build.config
 $RUNNER_BIN $RUNNER_ARG ./scripts/configure.fsx "$@"
-$RUNNER_BIN $RUNNER_ARG ./scripts/snapcraftBeta.fsx "$@"

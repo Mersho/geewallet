@@ -67,11 +67,14 @@ jobs:
     # > error: cannot communicate with server: Post "http://localhost/v2/snaps/snapcraft": dial unix /run/snapd.socket: connect: no such file or directory
     - name: HACK to emulate msbuild uninstall
       run: sudo rm `which msbuild`
+    
+    - name: Bump snap version
+      run: dotnet fsi ./scripts/snap_bump.fsx
 
     - name: Generate snap package
       run: |
         # retry 3 times because of flakey nuget; TODO: remove retry when we migrate to .NET6 (removing LEGACY_FRAMEWORK support)
-        ./scripts/snap_build_beta.sh --native-segwit || ./scripts/snap_build_beta.sh --native-segwit || ./scripts/snap_build_beta.sh --native-segwit || ./scripts/snap_build_beta.sh --native-segwit
+        ./scripts/snap_build.sh --native-segwit || ./scripts/snap_build.sh --native-segwit || ./scripts/snap_build.sh --native-segwit || ./scripts/snap_build.sh --native-segwit
 
     - name: Install snap
       # dangerous because it's a local snap (not one from the SnapStore)
@@ -89,7 +92,6 @@ jobs:
     - name: Upload snap package to Snap Store
       env:
         SNAPCRAFT_LOGIN: ${{ secrets.SNAPCRAFT_LOGIN }}
-        OVERRIDE_SNAP_VERSION: true
       run: |
         sudo apt update
         ./scripts/snap_release.sh beta
