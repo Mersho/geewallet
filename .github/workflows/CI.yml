@@ -71,7 +71,7 @@ jobs:
     - name: Generate snap package
       run: |
         # retry 3 times because of flakey nuget; TODO: remove retry when we migrate to .NET6 (removing LEGACY_FRAMEWORK support)
-        ./scripts/snap_build.sh --native-segwit || ./scripts/snap_build.sh --native-segwit || ./scripts/snap_build.sh --native-segwit || ./scripts/snap_build.sh --native-segwit
+        ./scripts/snap_build_beta.sh --native-segwit || ./scripts/snap_build_beta.sh --native-segwit || ./scripts/snap_build_beta.sh --native-segwit || ./scripts/snap_build_beta.sh --native-segwit
 
     - name: Install snap
       # dangerous because it's a local snap (not one from the SnapStore)
