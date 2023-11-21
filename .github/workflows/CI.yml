@@ -15,7 +15,7 @@ jobs:
       with:
         submodules: false
     - name: Setup .NET SDK 6.0.x
-      uses: actions/setup-dotnet@v1.7.2
+      uses: actions/setup-dotnet@v3.2.0
       with:
         dotnet-version: '6.0.113'
     - name: install maui workload
@@ -73,7 +73,7 @@ jobs:
       with:
         submodules: false
     - name: Setup .NET SDK 6.0.x
-      uses: actions/setup-dotnet@v1.7.2
+      uses: actions/setup-dotnet@v3.2.0
       with:
         dotnet-version: '6.0.x'
     - name: configure
@@ -133,7 +133,7 @@ jobs:
       with:
         submodules: true
     - name: Setup .NET SDK ${{ env.DotnetVersion }}
-      uses: actions/setup-dotnet@v1.7.2
+      uses: actions/setup-dotnet@v3.2.0
       with:
         dotnet-version: ${{ env.DotnetVersion }}
     - name: Install gtk workload
