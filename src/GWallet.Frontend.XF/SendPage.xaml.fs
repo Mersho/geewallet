@@ -49,6 +49,7 @@ type SendPage(account: IAccount, receivePage: Page, newReceivePageFunc: unit->Pa
 
     // TODO: this means MinerFeeHigherThanOutputs exception could be thrown (so, crash), handle it
     let ignoreMinerFeeHigherThanOutputs = false
+    let mutable isWalletAddressCameFromClipboardOrQR = false
 
     let mainLayout = base.FindByName<StackLayout>("mainLayout")
     let destinationScanQrCodeButton = mainLayout.FindByName<Button> "destinationScanQrCodeButton"
@@ -160,6 +161,7 @@ type SendPage(account: IAccount, receivePage: Page, newReceivePageFunc: unit->Pa
                     | _ -> result.Text,None
 
                 destinationAddressEntry.Text <- address
+                isWalletAddressCameFromClipboardOrQR <- true
                 match maybeAmount with
                 | None -> ()
                 | Some amount ->
@@ -362,14 +364,35 @@ type SendPage(account: IAccount, receivePage: Page, newReceivePageFunc: unit->Pa
             let final =
                 match maybeAddressWithValidChecksum with
                 | None -> None
-                | _ ->
+                | Some addressWithValidChecksum ->
                     //FIXME: warn user about bad checksum in any case (not only if the original address has mixed
                     // lowecase and uppercase like if had been validated, to see if he wants to continue or not
                     // (this text is better borrowed from the Frontend.Console project)
-                    if not (destinationAddress.All(fun char -> Char.IsLower char)) then
-                        None
+                    let isETHOrDAIOrSAI =
+                        match currency with
+                        | ETH
+                        | DAI
+                        | SAI -> true
+                        | _ -> false
+                    if not (destinationAddress.All(fun char -> Char.IsLower char)) || (isETHOrDAIOrSAI && not isWalletAddressCameFromClipboardOrQR) then
+                        async {
+                            let! ask =
+                                self.DisplayAlert(
+                                    "Alert",
+                                    "WARNING: the address provided didn't pass the checksum, are you sure you copied it properly? " +
+                                    "(If you copied it by hand or somebody dictated it to you, you probably made a spelling mistake.) " +
+                                    "Continue with this address?",
+                                    "Yes",
+                                    "No"
+                                )
+                                |> Async.AwaitTask
+
+                            return if ask then Some addressWithValidChecksum else None
+                        }
+                        |> Async.RunSynchronously
+
                     else
-                        maybeAddressWithValidChecksum
+                        Some addressWithValidChecksum
             if final.IsNone then
                 let msg = "Address doesn't seem to be valid, please try again."
                 MainThread.BeginInvokeOnMainThread(fun _ ->
@@ -547,6 +570,13 @@ type SendPage(account: IAccount, receivePage: Page, newReceivePageFunc: unit->Pa
                 sendOrSignButton.IsEnabled <- sendOrSignButtonEnabled
             )
             } |> FrontendHelpers.DoubleCheckCompletionAsync false
+    
+    member __.destinationAddressEntry_TextChanged(_sender: Object, _args: TextChangedEventArgs) =
+        match _args.NewTextValue, _args.OldTextValue with
+        | newText, oldText when newText.Length - oldText.Length > 1 ->
+            isWalletAddressCameFromClipboardOrQR <- true
+        | _ ->
+            ()
 
     member __.OnCancelButtonClicked(_sender: Object, _args: EventArgs) =
         MainThread.BeginInvokeOnMainThread(fun _ ->
