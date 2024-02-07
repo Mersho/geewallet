@@ -365,32 +365,27 @@ type SendPage(account: IAccount, receivePage: Page, newReceivePageFunc: unit->Pa
                 match maybeAddressWithValidChecksum with
                 | None -> None
                 | Some addressWithValidChecksum ->
-                    //FIXME: warn user about bad checksum in any case (not only if the original address has mixed
-                    // lowecase and uppercase like if had been validated, to see if he wants to continue or not
-                    // (this text is better borrowed from the Frontend.Console project)
-                    let isETHOrDAIOrSAI =
-                        match currency with
-                        | ETH
-                        | DAI
-                        | SAI -> true
-                        | _ -> false
-                    if not (destinationAddress.All(fun char -> Char.IsLower char)) || (isETHOrDAIOrSAI && not isWalletAddressCameFromClipboardOrQR) then
-                        async {
-                            let! ask =
-                                self.DisplayAlert(
-                                    "Alert",
-                                    "WARNING: the address provided didn't pass the checksum, are you sure you copied it properly? " +
-                                    "(If you copied it by hand or somebody dictated it to you, you probably made a spelling mistake.) " +
-                                    "Continue with this address?",
-                                    "Yes",
-                                    "No"
-                                )
-                                |> Async.AwaitTask
+                    if currency.IsEtherBased () && not isWalletAddressCameFromClipboardOrQR then
+                        // let! answerToFee = Async.AwaitTask (self.DisplayAlert("Alert", feeAskMsg, "OK", "Cancel"))
+                        let mytask = async {
+                            let! userAwnser = Async.AwaitTask (self.DisplayAlert(
+                                "Alert",
+                                "WARNING: the address provided didn't pass the checksum, are you sure you copied it properly? " +
+                                "(Pasting the address from clipboard is recommended.)" +
+                                "Continue with this address?",
+                                "Yes",
+                                "No"
+                            ))
 
-                            return if ask then Some addressWithValidChecksum else None
+                            
+                            if userAwnser then
+                                Some addressWithValidChecksum
+                            else
+                                None
                         }
-                        |> Async.RunSynchronously
 
+                        Async.StartImmediate mytask
+                        
                     else
                         Some addressWithValidChecksum
             if final.IsNone then
