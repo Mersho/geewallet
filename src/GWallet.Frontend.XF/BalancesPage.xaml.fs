@@ -464,6 +464,8 @@ type BalancesPage(state: FrontendHelpers.IGlobalAppState,
                 normalChartView.BalanceLabel.TextColor <- color
                 normalAccountsBalanceSets,color
 
+        Console.WriteLine color
+        Console.WriteLine labels
         for balanceSet in labels do
             balanceSet.Widgets.CryptoLabel.TextColor <- color
             balanceSet.Widgets.FiatLabel.TextColor <- color
